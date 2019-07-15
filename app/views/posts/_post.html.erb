@@ -1,0 +1,27 @@
+<li class="post">
+  <div class="post-head">
+    <% if @user.avatar? %>
+      <%= image_tag @user.avatar.to_s %>
+    <% else %>
+      <%= image_tag "ocean.jpg" %>
+    <% end %>
+    <strong><%= link_to post.user.name, post.user %></strong>
+  </div>
+  <div class="caption">
+    <%= post.content %>
+  </div>
+  <div class="flexslider">
+    <ul class="slides">
+      <% post.photos.each do |p| %>
+        <li>
+          <%= image_tag p.image_url, class: "media" %>
+        </li>
+      <% end %>
+      <% post.videos.each do |v| %>
+        <li>
+          <%= video_tag v.clip_url, controls: true, class: "media" %>
+        </li>
+      <% end %>
+      </ul>
+  </div>
+</li>

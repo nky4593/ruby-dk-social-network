@@ -5,7 +5,13 @@ class UsersController < ApplicationController
 
   def index; end
 
-  def show; end
+  def show
+    @posts = @user.posts.order_posts.page(params[:page]).per 10
+    return if @user
+
+    flash.alert = "User not found"
+    redirect_to root_path
+  end
 
   def edit; end
 

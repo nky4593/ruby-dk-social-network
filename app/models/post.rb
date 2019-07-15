@@ -15,4 +15,14 @@ class Post < ApplicationRecord
 
   validates :user_id, presence: true
   validates :content, length: {maximum: Settings.content_max}
+  validate :post_presences
+  scope :order_posts, -> { order created_at: :desc }
+
+  private
+
+  def post_presences
+    if content.blank? && photos.blank? && videos.blank?
+      errors.add :post, "Please post some thing"
+    end
+  end
 end
